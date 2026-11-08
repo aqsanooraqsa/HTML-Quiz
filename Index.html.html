@@ -1,0 +1,179 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>HTML Mid-Term Practice Quiz</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>
+:root{--bg:#f7f6f2;--card:#fff;--tx:#1f2328;--mu:#667;--ac:#2f6fed;--ok:#1a8f4c;--bad:#d1342f;--bd:#dcdad2;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#17181b;--card:#22242a;--tx:#e8e8ea;--mu:#9a9aa5;--ac:#6c9bff;--ok:#4cc27f;--bad:#ff6b66;--bd:#383b44}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.5 system-ui,sans-serif}
+main{max-width:760px;margin:auto;padding:12px}h1{font-size:1.4rem;margin:.4rem 0}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);padding:8px 0;display:flex;gap:8px;justify-content:space-between;align-items:center;z-index:5;border-bottom:1px solid var(--bd)}
+.tabs{display:flex;gap:6px;margin:8px 0}.tabs button,.btn{border:1px solid var(--bd);background:var(--card);color:var(--tx);padding:8px 14px;border-radius:8px;font:inherit;cursor:pointer}
+.tabs button.on,.btn.p{background:var(--ac);color:#fff;border-color:var(--ac)}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:12px 14px;margin:10px 0}
+.q{font-weight:600;margin-bottom:6px}.t{font-size:.75rem;color:var(--mu);text-transform:uppercase}
+label.o{display:block;padding:6px 8px;border-radius:6px;cursor:pointer;border:1px solid transparent}label.o:hover{background:var(--bg)}
+label.o.ok{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 15%,transparent)}label.o.bad{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 15%,transparent)}
+.ex{font-size:.9rem;color:var(--mu);margin-top:6px}pre{background:var(--bg);padding:10px;border-radius:8px;overflow-x:auto;font-size:.82rem;white-space:pre}
+.big{font-size:2.2rem;font-weight:700}.row{display:flex;align-items:center;gap:8px;margin:4px 0;font-size:.9rem}.row i{display:block;height:10px;border-radius:5px;background:var(--ac)}
+.row span:first-child{width:130px;flex:none}input[type=text]{padding:8px;border-radius:8px;border:1px solid var(--bd);background:var(--card);color:var(--tx);font:inherit;width:100%}
+.hide{display:none}.tm{font-variant-numeric:tabular-nums;font-weight:700}
+</style></head><body><main>
+<h1>HTML Mid-Term Practice</h1>
+<div class="tabs"><button id="t1" class="on" onclick="tab(1)">MCQ Quiz</button><button id="t2" onclick="tab(2)">Written Practice</button><button id="t3" onclick="tab(3)">Class Results</button></div>
+<section id="p1"><div id="intro" class="card"><p><b>54 MCQs · 30 minutes.</b> Pick answers, press Submit (or wait for the timer). You get your score, topic analysis and an explanation for every miss.</p><input type="text" id="nm" placeholder="Your name (so friends can compare)" maxlength="30"><p><button class="btn p" onclick="start()">Start quiz</button></p></div>
+<div id="qz" class="hide"><div class="bar"><span id="pr">0/54 answered</span><span class="tm" id="tmr">30:00</span><button class="btn p" onclick="submit()">Submit</button></div><div id="qs"></div></div>
+<div id="res" class="hide"></div></section>
+<section id="p2" class="hide"></section><section id="p3" class="hide"></section>
+<script>
+const Q=[];const q=(t,a,c,x,y,z,e)=>Q.push({t,a,o:[c,x,y,z],e});
+const B="Basics",H="Head & Links",F="Formatting & Lists",T="Tables",O="Forms",S="Semantic & Layout",C="CSS (from paper)";
+q(B,"HTML stands for?","HyperText Markup Language","High Text Machine Language","HyperTool Multi Language","Home Text Markup Level","Markup language that structures web pages.");
+q(B,"HTML is best described as a…","markup language","programming language","database language","styling language","It defines content and structure, not logic.");
+q(B,"Which tag holds the visible page content?","<body>","<head>","<title>","<meta>","");
+q(B,"Tags are written inside…","angle brackets < >","curly braces { }","square brackets [ ]","parentheses ( )","");
+q(B,"Which is a correct closing tag?","</p>","<p/>","<\\p>","</p","");
+q(B,"What does DNS lookup do?","Converts a domain name into an IP address","Encrypts the website","Designs the page layout","Stores website images","Exam Q1 topic: URL + DNS.");
+q(B,"URL stands for?","Uniform Resource Locator","Universal Rule Link","Unified Resource Language","User Request Locator","The address of a resource on the web.");
+q(B,"Largest heading tag?","<h1>","<h6>","<head>","<hh>","h1 is largest, h6 smallest.");
+q(B,"Which tag defines a paragraph?","<p>","<para>","<pg>","<text>","");
+q(B,"Which tag displays an image?","<img>","<image>","<pic>","<src>","");
+q(H,"Which tag does NOT display content on the page?","<head>","<body>","<p>","<h1>","It holds metadata, styles and scripts.");
+q(H,"Which tag sets the browser-tab title?","<title>","<header>","<h1>","<meta>","");
+q(H,"Which tag links an external CSS file?","<link>","<style>","<script>","<a>","");
+q(H,"Which tag embeds internal CSS?","<style>","<link>","<css>","<meta>","");
+q(H,"Which tag links a JavaScript file?","<script>","<js>","<link>","<style>","");
+q(H,"<meta> is used for…","character encoding / responsiveness","adding images","creating lists","hyperlinks","");
+q(H,"target=\"_blank\" does what?","Opens the link in a new tab","Closes the page","Blanks the link text","Opens in same tab","");
+q(H,"Correct link to send an email?","href=\"mailto:info@example.com\"","href=\"email:info@example.com\"","href=\"send:info@example.com\"","href=\"info@example.com\"","");
+q(H,"Which href jumps to a section on the same page?","#section1","section1.html","mailto:section1","_section1","");
+q(H,"<a href=\"about.html\"> is an example of a…","relative (internal) link","absolute link","email link","anchor image","");
+q(F,"Which tag highlights text?","<mark>","<hl>","<b>","<small>","");
+q(F,"Which tag shows deleted text (strikethrough)?","<del>","<u>","<sub>","<strike-out>","");
+q(F,"For H₂O, the 2 uses…","<sub>","<sup>","<small>","<i>","");
+q(F,"For X², the 2 uses…","<sup>","<sub>","<mark>","<b>","");
+q(F,"Which tag makes text italic?","<i>","<b>","<u>","<del>","");
+q(F,"Default marker of <ul>?","Bullets","Numbers","Letters","Roman numerals","");
+q(F,"Default marker of <ol>?","Numbers","Bullets","Dashes","Squares","");
+q(F,"To start an ordered list with i, ii, iii use…","<ol type=\"i\">","<ol type=\"1\">","<ol type=\"A\">","<ul type=\"i\">","Exam Q4(a). type=\"I\" gives uppercase Roman.");
+q(F,"Tag for a single list item?","<li>","<item>","<list>","<ls>","");
+q(F,"Which is a BLOCK-level element?","<div>","<span>","<b>","<a>","Block elements start on a new line and take full width.");
+q(F,"Which is an INLINE element?","<span>","<div>","<p>","<table>","");
+q(F,"Inline elements…","take only the width they need","always start on a new line","take full width","cannot hold text","");
+q(T,"Tag that creates a table?","<table>","<tab>","<tbl>","<grid>","");
+q(T,"Tag for a table row?","<tr>","<td>","<th>","<row>","");
+q(T,"Tag for a header cell (bold by default)?","<th>","<td>","<thead-cell>","<hd>","");
+q(T,"Tag for a data cell?","<td>","<tr>","<th>","<dt>","");
+q(T,"colspan=\"2\" does what?","Merges two columns","Merges two rows","Adds 2px border","Adds two tables","Exam Q2 needs colspan for 'Stock in Stores'.");
+q(T,"rowspan=\"2\" does what?","Merges two rows","Merges two columns","Doubles height in px","Adds two borders","");
+q(T,"cellpadding controls…","space inside cells","space between cells","border colour","table width","");
+q(T,"cellspacing controls…","space between cells","space inside cells","text size","font","");
+q(T,"border=\"1\" on <table> gives…","a visible border","1 row","1 column","bold text","");
+q(O,"Which tag collects user input?","<form>","<input-box>","<data>","<submit>","");
+q(O,"Input type that hides typed characters?","password","text","hidden-text","secret","");
+q(O,"Radio buttons are grouped using the same…","name","id","value","for","Same name = only one can be chosen.");
+q(O,"label's for attribute must match the input's…","id","name","value","type","");
+q(O,"value attribute holds…","the data submitted if selected","the element's unique id","the group name","the label link","");
+q(O,"Which input type gives a date picker?","date","calendar","time","datetime-text","");
+q(O,"Checkbox lets you…","select one or more options","select exactly one","type text","upload files","");
+q(S,"Which is a semantic element?","<footer>","<div>","<span>","<b>","");
+q(S,"Which is NON-semantic?","<div>","<nav>","<article>","<aside>","");
+q(S,"Tag for navigation links (Home, About, Contact)?","<nav>","<menu-bar>","<links>","<aside>","Exam Q3 layout.");
+q(S,"Tag for independent, self-contained content?","<article>","<section>","<aside>","<span>","");
+q(S,"Tag for side content?","<aside>","<side>","<footer>","<main>","");
+q(C,"CSS: div > p selects…","<p> that are direct children of a div","all p anywhere inside div","p right after a div","every div and p","Child combinator. A p inside <section> inside div is NOT a direct child.");
+q(C,"CSS: div + p selects…","a <p> immediately after a div (sibling)","a p inside a div","all p","a div inside p","Adjacent sibling combinator.");
+q(C,"To keep a header fixed on screen use…","position: fixed","position: static","float: header","display: none","Exam Q3 asks fixed header.");
+q(C,"Default CSS position value?","static","fixed","relative","absolute","");
+let order=[],ans={},tl,left=1800,sub=false,db=null,uid=null;
+const $=id=>document.getElementById(id),L=["A","B","C","D"];
+function tab(n){[1,2,3].forEach(i=>{$("p"+i).classList.toggle("hide",i!=n);$("t"+i).classList.toggle("on",i==n)});if(n==3)loadRes()}
+function sh(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a}
+function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;")}
+function start(){$("intro").classList.add("hide");$("qz").classList.remove("hide");
+order=Q.map((x,i)=>({i,o:sh(x.o.map((t,k)=>[t,k==0]))}));
+$("qs").innerHTML=order.map((x,n)=>`<div class="card"><div class="t">${n+1} · ${Q[x.i].t}</div><div class="q">${esc(Q[x.i].a)}</div>${x.o.map((o,k)=>`<label class="o" id="l${n}_${k}"><input type="radio" name="q${n}" value="${k}" onchange="ans[${n}]=${k};$('pr').textContent=Object.keys(ans).length+'/54 answered'"> ${L[k]}. ${esc(o[0])}</label>`).join("")}<div class="ex hide" id="e${n}"></div></div>`).join("");
+tl=setInterval(()=>{left--;$("tmr").textContent=String(left/60|0).padStart(2,"0")+":"+String(left%60).padStart(2,"0");if(left<=0)submit()},1000)}
+async function submit(){if(sub)return;sub=true;clearInterval(tl);let sc=0,tp={},wr=[];
+order.forEach((x,n)=>{const t=Q[x.i].t;tp[t]=tp[t]||[0,0];tp[t][1]++;const a=ans[n],ok=a!==undefined&&x.o[a][1];if(ok){sc++;tp[t][0]++}else wr.push(x.i);
+x.o.forEach((o,k)=>{const l=$(`l${n}_${k}`);const i=l.querySelector("input");i.disabled=true;if(o[1])l.classList.add("ok");else if(a===k)l.classList.add("bad")});
+const e=$("e"+n);e.classList.remove("hide");e.textContent=(ok?"✓ Correct. ":a===undefined?"Not answered. ":"✗ Wrong. ")+Q[x.i].e});
+const pct=Math.round(sc/Q.length*100);
+$("res").classList.remove("hide");$("res").innerHTML=`<div class="card"><div class="big">${sc}/${Q.length} (${pct}%)</div><p>${pct>=80?"Excellent — you're exam ready.":pct>=60?"Good. Revise the weak topics below.":"Needs work. Re-read the weak topics first."}</p><h3>Topic analysis</h3>${Object.entries(tp).map(([k,v])=>`<div class="row"><span>${k}</span><i style="width:${v[0]/v[1]*100*.5}%;min-width:3px"></i><span>${v[0]}/${v[1]}</span></div>`).join("")}<p><button class="btn" onclick="location.reload()">Retake</button> <button class="btn p" onclick="cp(${sc},${pct})">Copy score to share</button></p></div>`;
+$("res").scrollIntoView();
+try{if(db){await db.collection("results").doc(uid).set({name:$("nm").value.trim()||"Anonymous",score:sc,total:Q.length,wrong:wr,at:Date.now()})}}catch(e){}}
+function cp(s,p){const t=`I scored ${s}/${Q.length} (${p}%) on the HTML practice quiz!`;navigator.clipboard&&navigator.clipboard.writeText(t).catch(()=>{});alert(t)}
+async function loadRes(){const el=$("p3");el.innerHTML='<div class="card">Loading…</div>';
+if(!db){el.innerHTML='<div class="card">Shared class results need a signed-in claude.ai viewer. You can still use "Copy score to share" after your quiz.</div>';return}
+try{const sn=await db.collection("results").get();const r=[];sn.docs.forEach(d=>{const v=d.data();if(v)r.push(v)});
+if(!r.length){el.innerHTML='<div class="card">No attempts yet.</div>';return}
+r.sort((a,b)=>b.score-a.score);const avg=(r.reduce((s,x)=>s+x.score,0)/r.length).toFixed(1);const mc={};r.forEach(x=>(x.wrong||[]).forEach(i=>mc[i]=(mc[i]||0)+1));
+const hard=Object.entries(mc).sort((a,b)=>b[1]-a[1]).slice(0,8);
+el.innerHTML=`<div class="card"><b>${r.length} attempts · average ${avg}/${Q.length}</b></div><div class="card"><h3>Leaderboard</h3>${r.map((x,i)=>`<div class="row"><span>${i+1}. ${esc(String(x.name))}</span><span>${x.score}/${x.total}</span></div>`).join("")}</div><div class="card"><h3>Hardest questions</h3>${hard.map(([i,c])=>`<div class="row"><span style="width:60px">${c} missed</span><span>${esc(Q[i].a)}</span></div>`).join("")}</div>`}catch(e){el.innerHTML='<div class="card">Could not load results.</div>'}}
+const W=[["Q1 (4 marks) What is a website, and how do websites work? Explain the role of a URL and DNS lookup.","A website is a collection of web pages (HTML, CSS, JS, images) stored on a web server and reached through a domain name.\n1. User types a URL (e.g. https://www.kust.edu.pk) in the browser.\n   URL = Uniform Resource Locator: protocol + domain + path.\n2. Browser does a DNS lookup: the DNS server converts the domain name into the server's IP address.\n3. Browser sends an HTTP/HTTPS request to that IP.\n4. Server replies with HTML/CSS/JS files.\n5. Browser renders them as the page."],
+["Q2 (7 marks) Write HTML for the stock table (Code, Product, Stock in Stores → Warehouses A, B, C; rows P101, P102, Total).",`<table border="1" cellpadding="5">
+  <tr>
+    <th rowspan="2">Code</th>
+    <th rowspan="2">Product</th>
+    <th colspan="3">Stock in Stores</th>
+  </tr>
+  <tr>
+    <th>Stock in Warehouses A</th>
+    <th>Stock in Warehouses B</th>
+    <th>Stock in Warehouses C</th>
+  </tr>
+  <tr><td>P101</td><td>Laptop</td><td>25</td><td>18</td><td>22</td></tr>
+  <tr><td>P102</td><td>Keyboard</td><td>40</td><td>35</td><td>30</td></tr>
+  <tr><th colspan="2">Total</th><td>65</td><td>53</td><td>52</td></tr>
+</table>`],
+["Q3 (7 marks) Form layout: fixed header (nav), form with name, email, gender radios, country select, submit, static footer. Use semantic tags + external CSS.",`<!-- index.html -->
+<link rel="stylesheet" href="style.css">
+<header><nav><a href="#">Home</a> <a href="#">About</a> <a href="#">Contact</a></nav></header>
+<main>
+ <form action="" method="post">
+  <label for="name">Name:</label>
+  <input type="text" id="name" name="name" placeholder="Enter your name">
+  <label for="email">Email:</label>
+  <input type="email" id="email" name="email" placeholder="Enter your email">
+  <p>Gender:</p>
+  <input type="radio" id="m" name="gender" value="male"><label for="m">Male</label>
+  <input type="radio" id="f" name="gender" value="female"><label for="f">Female</label>
+  <label for="c">Country:</label>
+  <select id="c" name="country"><option>Pakistan</option><option>India</option></select>
+  <input type="submit" value="Submit">
+ </form>
+</main>
+<footer>© 2025 | KUST</footer>
+
+/* style.css */
+header{position:fixed;top:0;left:0;width:100%;background:#222;}
+nav a{color:#fff;padding:10px;text-decoration:none;}
+main{margin:60px auto 0;width:300px;}
+footer{background:#888;color:#fff;text-align:center;padding:8px;}
+/* footer stays static at page bottom (position: static, after main) */`],
+["Q4(a) (2 marks) Ordered list of Python, Java, C++ with Roman numerals (i, ii, …).",`<ol type="i">
+  <li>Python</li>
+  <li>Java</li>
+  <li>C++</li>
+</ol>`],
+["Q4(b) (5 marks) Output of the given HTML/CSS (p green; div > p orange; div + p yellow background).",`Paragraph A  – orange (direct child of div)
+Paragraph B  – orange (direct child of div)
+Paragraph C  – green  (inside <section>, not a direct child)
+Paragraph D  – green text + YELLOW background
+               (p immediately after the first </div>)
+Paragraph E  – orange (direct child of div.box); "E" in span inherits orange
+               (no yellow: its previous sibling is not a div)
+Visit KUST   – link text in browser's default link colour (a is not a p)
+
+Key rules: div > p = direct children only; div + p = p right after a div.`],
+["Q5 (practice) Differentiate semantic and non-semantic tags; block and inline elements.","Semantic: describe meaning (header, nav, main, section, article, aside, footer).\nNon-semantic: no meaning, used for layout/styling (div, span).\nBlock: starts on new line, full width (p, div, h1–h6, ul, ol, table).\nInline: stays in line, only needed width (span, a, b, i, u, img, small)."],
+["Q6 (practice) Write a form with a text field, email, password, a checkbox and a submit button. Explain id, name, for and value.",`<form action="" method="post">
+ <label for="u">Name:</label> <input type="text" id="u" name="username">
+ <label for="e">Email:</label> <input type="email" id="e" name="email">
+ <label for="p">Password:</label> <input type="password" id="p" name="pw">
+ <input type="checkbox" id="a" name="agree" value="yes"><label for="a">I agree</label>
+ <input type="submit" value="Submit">
+</form>
+id = unique identifier; name = key sent with form data (groups radios);
+for = links label to the input's id; value = data submitted if selected.`]];
+$("p2").innerHTML='<p>Try writing each answer on paper first, then reveal the model answer.</p>'+W.map((w,i)=>`<div class="card"><div class="q">${esc(w[0])}</div><button class="btn" onclick="this.nextElementSibling.classList.toggle('hide')">Show / hide model answer</button><pre class="hide">${esc(w[1])}</pre></div>`).join("");
+(async()=>{try{const c=await claude.use("db"),u=await claude.use("user");if(c&&u){db=c;uid=await u.id()}}catch(e){}})();
+</script></main></body></html>
